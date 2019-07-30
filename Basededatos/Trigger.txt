@@ -1,0 +1,149 @@
+CREATE OR REPLACE TRIGGER tr_Usuario_Insert AFTER INSERT ON Usuario FOR EACH ROW
+INSERT INTO Bitacora(NombreTabla, NombreCampo, Fecha, Usuario, ValorAnterior, ValorNuevo, Accion, IdCampo)
+VALUES('Usuario', 'NomUsuario', now(), current_user(), '', NEW.NomUsuario, 'Insert', NEW.NomUsuario),
+('Usuario', 'Nombre', now(), current_user(), '', NEW.Nombre, 'Insert', NEW.NomUsuario),
+('Usuario', 'ApePat', now(), current_user(), '', NEW.ApePat, 'Insert', NEW.NomUsuario),
+('Usuario', 'ApeMat', now(), current_user(), '', NEW.ApeMat, 'Insert', NEW.NomUsuario),
+('Usuario', 'FechaNac', now(), current_user(), '', NEW.FechaNac, 'Insert', NEW.NomUsuario),
+('Usuario', 'Correo', now(), current_user(), '', NEW.Correo, 'Insert', NEW.NomUsuario),
+('Usuario', 'Telefono', now(), current_user(), '', NEW.Telefono, 'Insert', NEW.NomUsuario),
+('Usuario', 'Contrasenia', now(), current_user(), '', NEW.Contrasenia, 'Insert', NEW.NomUsuario),
+('Usuario', 'IdPais', now(), current_user(), '', NEW.IdPais, 'Insert', NEW.NomUsuario),
+('Usuario', 'IdEstado', now(), current_user(), '', NEW.IdEstado, 'Insert', NEW.NomUsuario);
+
+CREATE OR REPLACE TRIGGER tr_Usuario_Update AFTER UPDATE ON Usuario FOR EACH ROW
+INSERT INTO Bitacora(NombreTabla, NombreCampo, Fecha, Usuario, ValorAnterior, ValorNuevo, Accion, IdCampo)
+VALUES('Usuario', 'NomUsuario', now(), current_user(), OLD.NomUsuario, NEW.NomUsuario, 'Update', NEW.NomUsuario),
+('Usuario', 'Nombre', now(), current_user(), OLD.Nombre, NEW.Nombre, 'Update', NEW.NomUsuario),
+('Usuario', 'ApePat', now(), current_user(), OLD.ApePat, NEW.ApePat, 'Update', NEW.NomUsuario),
+('Usuario', 'ApeMat', now(), current_user(), OLD.ApeMat, NEW.ApeMat, 'Update', NEW.NomUsuario),
+('Usuario', 'FechaNac', now(), current_user(), OLD.FechaNac, NEW.FechaNac, 'Update', NEW.NomUsuario),
+('Usuario', 'Correo', now(), current_user(), OLD.Correo, NEW.Correo, 'Update', NEW.NomUsuario),
+('Usuario', 'Telefono', now(), current_user(), OLD.Telefono, NEW.Telefono, 'Update', NEW.NomUsuario),
+('Usuario', 'Contrasenia', now(), current_user(), OLD.Contrasenia, NEW.Contrasenia, 'Update', NEW.NomUsuario),
+('Usuario', 'IdPais', now(), current_user(), OLD.IdPais, NEW.IdPais, 'Update', NEW.NomUsuario),
+('Usuario', 'IdEstado', now(), current_user(), OLD.IdEstado, NEW.IdEstado, 'Update', NEW.NomUsuario);
+
+CREATE OR REPLACE TRIGGER tr_Usuario_Delete AFTER DELETE ON Usuario FOR EACH ROW
+INSERT INTO Bitacora(NombreTabla, NombreCampo, Fecha, Usuario, ValorAnterior, ValorNuevo, Accion, IdCampo)
+VALUES('Usuario', 'NomUsuario', now(), current_user(), OLD.NomUsuario, '', 'Delete', OLD.NomUsuario),
+('Usuario', 'Nombre', now(), current_user(), OLD.Nombre, '', 'Delete', OLD.NomUsuario),
+('Usuario', 'ApePat', now(), current_user(), OLD.ApePat, '', 'Delete', OLD.NomUsuario),
+('Usuario', 'ApeMat', now(), current_user(), OLD.ApeMat, '', 'Delete', OLD.NomUsuario),
+('Usuario', 'FechaNac', now(), current_user(), OLD.FechaNac, '', 'Delete', OLD.NomUsuario),
+('Usuario', 'Correo', now(), current_user(), OLD.Correo, '', 'Delete', OLD.NomUsuario),
+('Usuario', 'Telefono', now(), current_user(), OLD.Telefono, '', 'Delete', OLD.NomUsuario),
+('Usuario', 'Contrasenia', now(), current_user(), OLD.Contrasenia, '', 'Delete', OLD.NomUsuario),
+('Usuario', 'IdPais', now(), current_user(), OLD.IdPais, '', 'Delete', OLD.NomUsuario),
+('Usuario', 'IdEstado', now(), current_user(), OLD.IdEstado, '', 'Delete', OLD.NomUsuario);
+--------------------------------------------------------------------------------------------------------------------------
+CREATE TRIGGER tr_Historial_Insert AFTER INSERT ON Historial FOR EACH ROW
+INSERT INTO Bitacora(NombreTabla, NombreCampo, Fecha, Usuario, ValorAnterior, ValorNuevo, Accion, IdCampo)
+VALUES('Historial', 'Fecha', now(), current_user(), '', NEW.Fecha, 'Insert', NEW.IdHistorial),
+('Historial', 'Costo', now(), current_user(), '', NEW.Costo, 'Insert', NEW.IdHistorial),
+('Historial', 'Pago', now(), current_user(), '', NEW.Pago, 'Insert', NEW.IdHistorial),
+('Historial', 'Descuento', now(), current_user(), '', NEW.Descuento, 'Insert', NEW.IdHistorial),
+('Historial', 'NomUsuario', now(), current_user(), '', NEW.NomUsuario, 'Insert', NEW.IdHistorial),
+('Historial', 'IdRuta', now(), current_user(), '', NEW.IdRuta, 'Insert', NEW.IdHistorial);
+
+CREATE TRIGGER tr_Historial_Update AFTER UPDATE ON Historial FOR EACH ROW
+INSERT INTO Bitacora(NombreTabla, NombreCampo, Fecha, Usuario, ValorAnterior, ValorNuevo, Accion, IdCampo)
+VALUES('Historial', 'Fecha', now(), current_user(), OLD.Fecha, NEW.Fecha, 'Update', NEW.IdHistorial),
+('Historial', 'Costo', now(), current_user(), OLD.Costo, NEW.Costo, 'Update', NEW.IdHistorial),
+('Historial', 'Pago', now(), current_user(), OLD.Pago, NEW.Pago, 'Update', NEW.IdHistorial),
+('Historial', 'Descuento', now(), current_user(), OLD.Descuento, NEW.Descuento, 'Update', NEW.IdHistorial),
+('Historial', 'NomUsuario', now(), current_user(), OLD.NomUsuario, NEW.NomUsuario, 'Update', NEW.IdHistorial),
+('Historial', 'IdRuta', now(), current_user(), OLD.IdRuta, NEW.IdRuta, 'Update', NEW.IdHistorial);
+
+CREATE TRIGGER tr_Historial_Delete AFTER DELETE ON Historial FOR EACH ROW
+INSERT INTO Bitacora(NombreTabla, NombreCampo, Fecha, Usuario, ValorAnterior, ValorNuevo, Accion, IdCampo)
+VALUES('Historial', 'Fecha', now(), current_user(), OLD.Fecha, '', 'Delete', OLD.IdHistorial),
+('Historial', 'Costo', now(), current_user(), OLD.Costo, '', 'Delete', OLD.IdHistorial),
+('Historial', 'Pago', now(), current_user(), OLD.Pago, '', 'Delete', OLD.IdHistorial),
+('Historial', 'Descuento', now(), current_user(), OLD.Descuento, '', 'Delete', OLD.IdHistorial),
+('Historial', 'NomUsuario', now(), current_user(), OLD.NomUsuario, '', 'Delete', OLD.IdHistorial),
+('Historial', 'IdRuta', now(), current_user(), OLD.IdRuta, '', 'Delete', OLD.IdHistorial);
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+CREATE TRIGGER tr_Ruta_Insert AFTER INSERT ON Ruta FOR EACH ROW
+INSERT INTO Bitacora(NombreTabla, NombreCampo, Fecha, Usuario, ValorAnterior, ValorNuevo, Accion, IdCampo)
+VALUES('Ruta', 'NomRuta', now(), current_user(), '', NEW.NomRuta, 'Insert', NEW.IdRuta),
+('Ruta', 'Tipo', now(), current_user(), '', NEW.Tipo, 'Insert', NEW.IdRuta),
+('Ruta', 'Duracion', now(), current_user(), '', NEW.Duracion, 'Insert', NEW.IdRuta);
+
+CREATE TRIGGER tr_Ruta_Update AFTER UPDATE ON Ruta FOR EACH ROW
+INSERT INTO Bitacora(NombreTabla, NombreCampo, Fecha, Usuario, ValorAnterior, ValorNuevo, Accion, IdCampo)
+VALUES('Ruta', 'NomRuta', now(), current_user(), OLD.NomRuta, NEW.NomRuta, 'Update', NEW.IdRuta),
+('Ruta', 'Tipo', now(), current_user(), OLD.Tipo, NEW.Tipo, 'Update', NEW.IdRuta),
+('Ruta', 'Duracion', now(), current_user(), OLD.Duracion, NEW.Duracion, 'Update', NEW.IdRuta);
+
+CREATE TRIGGER tr_Ruta_Delete AFTER DELETE ON Ruta FOR EACH ROW
+INSERT INTO Bitacora(NombreTabla, NombreCampo, Fecha, Usuario, ValorAnterior, ValorNuevo, Accion, IdCampo)
+VALUES('Ruta', 'NomRuta', now(), current_user(), OLD.NomRuta, '', 'Delete', OLD.IdRuta),
+('Ruta', 'Tipo', now(), current_user(), OLD.Tipo, '', 'Delete', OLD.IdRuta),
+('Ruta', 'Duracion', now(), current_user(), OLD.Duracion, '', 'Delete', OLD.IdRuta);
+------------------------------------------------------------------------------------------------------------------------------------
+CREATE TRIGGER tr_Etapa_Insert AFTER INSERT ON Etapa FOR EACH ROW
+INSERT INTO Bitacora(NombreTabla, NombreCampo, Fecha, Usuario, ValorAnterior, ValorNuevo, Accion, IdCampo)
+VALUES('Etapa', 'NomEtapa', now(), current_user(), '', NEW.NomEtapa, 'Insert', NEW.IdEtapa),
+('Etapa', 'Duracion', now(), current_user(), '', NEW.Duracion, 'Insert', NEW.IdEtapa),
+('Etapa', 'Descripcion', now(), current_user(), '', NEW.Descripcion, 'Insert', NEW.IdEtapa),
+('Etapa', 'IdRuta', now(), current_user(), '', NEW.IdRuta, 'Insert', NEW.IdEtapa);
+
+CREATE TRIGGER tr_Etapa_Update AFTER UPDATE ON Etapa FOR EACH ROW
+INSERT INTO Bitacora(NombreTabla, NombreCampo, Fecha, Usuario, ValorAnterior, ValorNuevo, Accion, IdCampo)
+VALUES('Etapa', 'NomEtapa', now(), current_user(), OLD.NomEtapa, NEW.NomEtapa, 'Update', NEW.IdEtapa),
+('Etapa', 'Duracion', now(), current_user(), OLD.Duracion, NEW.Duracion, 'Update', NEW.IdEtapa),
+('Etapa', 'Descripcion', now(), current_user(), OLD.Descripcion, NEW.Descripcion, 'Update', NEW.IdEtapa),
+('Etapa', 'IdRuta', now(), current_user(), OLD.IdRuta, NEW.IdRuta, 'Update', NEW.IdEtapa);
+
+CREATE TRIGGER tr_Etapa_Delete AFTER DELETE ON Etapa FOR EACH ROW
+INSERT INTO Bitacora(NombreTabla, NombreCampo, Fecha, Usuario, ValorAnterior, ValorNuevo, Accion, IdCampo)
+VALUES('Etapa', 'NomRuta', now(), current_user(), OLD.NomEtapa, '', 'Delete', OLD.IdEtapa),
+('Etapa', 'Duracion', now(), current_user(), OLD.Duracion, '', 'Delete', OLD.IdEtapa),
+('Etapa', 'Descripcion', now(), current_user(), OLD.Descripcion, '', 'Delete', OLD.IdEtapa),
+('Etapa', 'IdRuta', now(), current_user(), OLD.IdRuta, '', 'Delete', OLD.IdEtapa);
+-------------------------------------------------------------------------------------------------------------------------------------------
+CREATE TRIGGER tr_Promocion_Insert AFTER INSERT ON Promocion FOR EACH ROW
+INSERT INTO Bitacora(NombreTabla, NombreCampo, Fecha, Usuario, ValorAnterior, ValorNuevo, Accion, IdCampo)
+VALUES('Promocion', 'PromocionQR', now(), current_user(), '', NEW.PromocionQR, 'Insert', NEW.PromocionQR),
+('Promocion', 'Descripcion', now(), current_user(), '', NEW.Descripcion, 'Insert', NEW.PromocionQR),
+('Promocion', 'Estatus', now(), current_user(), '', NEW.Estatus, 'Insert', NEW.PromocionQR),
+('Promocion', 'Descuento', now(), current_user(), '', NEW.Descuento, 'Insert', NEW.PromocionQR),
+('Promocion', 'IdEtapa', now(), current_user(), '', NEW.IdEtapa, 'Insert', NEW.PromocionQR);
+
+CREATE TRIGGER tr_Promocion_Update AFTER UPDATE ON Promocion FOR EACH ROW
+INSERT INTO Bitacora(NombreTabla, NombreCampo, Fecha, Usuario, ValorAnterior, ValorNuevo, Accion, IdCampo)
+VALUES('Promocion', 'PromocionQR', now(), current_user(), OLD.PromocionQR, NEW.PromocionQR, 'Update', NEW.PromocionQR),
+('Promocion', 'Descripcion', now(), current_user(), OLD.Descripcion, NEW.Descripcion, 'Update', NEW.PromocionQR),
+('Promocion', 'Estatus', now(), current_user(), OLD.Estatus, NEW.Estatus, 'Update', NEW.PromocionQR),
+('Promocion', 'Descuento', now(), current_user(), OLD.Descuento, NEW.Descuento, 'Update', NEW.PromocionQR),
+('Promocion', 'IdEtapa', now(), current_user(), OLD.IdEtapa, NEW.IdEtapa, 'Update', NEW.PromocionQR);
+
+CREATE TRIGGER tr_Promocion_Delete AFTER DELETE ON Promocion FOR EACH ROW
+INSERT INTO Bitacora(NombreTabla, NombreCampo, Fecha, Usuario, ValorAnterior, ValorNuevo, Accion, IdCampo)
+VALUES('Promocion', 'PromocionQR', now(), current_user(), OLD.PromocionQR, '', 'Delete', OLD.PromocionQR),
+('Promocion', 'Descripcion', now(), current_user(), OLD.Descripcion, '', 'Delete', OLD.PromocionQR),
+('Promocion', 'Estatus', now(), current_user(), OLD.Estatus, '', 'Delete', OLD.PromocionQR),
+('Promocion', 'Descuento', now(), current_user(), OLD.Descuento, '', 'Delete', OLD.PromocionQR),
+('Promocion', 'IdEtapa', now(), current_user(), OLD.IdEtapa, '', 'Delete', OLD.PromocionQR);
+---------------------------------------------------------------------------------------------------------------------------
+CREATE TRIGGER tr_UsuarioPromocion_Insert AFTER INSERT ON UsuarioPromocion FOR EACH ROW
+INSERT INTO Bitacora(NombreTabla, NombreCampo, Fecha, Usuario, ValorAnterior, ValorNuevo, Accion, IdCampo)
+VALUES('UsuarioPromocion', 'Fecha', now(), current_user(), '', NEW.Fecha, 'Insert', NEW.IdUsuarioPromocion),
+('UsuarioPromocion', 'Estatus', now(), current_user(), '', NEW.Estatus, 'Insert', NEW.IdUsuarioPromocion),
+('UsuarioPromocion', 'NomUsuario', now(), current_user(), '', NEW.NomUsuario, 'Insert', NEW.IdUsuarioPromocion),
+('UsuarioPromocion', 'PromocionQR', now(), current_user(), '', NEW.PromocionQR, 'Insert', NEW.IdUsuarioPromocion);
+
+CREATE TRIGGER tr_UsuarioPromocion_Update AFTER UPDATE ON UsuarioPromocion FOR EACH ROW
+INSERT INTO Bitacora(NombreTabla, NombreCampo, Fecha, Usuario, ValorAnterior, ValorNuevo, Accion, IdCampo)
+VALUES('UsuarioPromocion', 'Fecha', now(), current_user(), OLD.Fecha, NEW.Fecha, 'Update', NEW.IdUsuarioPromocion),
+('UsuarioPromocion', 'Estatus', now(), current_user(), OLD.Estatus, NEW.Estatus, 'Update', NEW.IdUsuarioPromocion),
+('UsuarioPromocion', 'NomUsuario', now(), current_user(), OLD.NomUsuario, NEW.NomUsuario, 'Update', NEW.IdUsuarioPromocion),
+('UsuarioPromocion', 'PromocionQR', now(), current_user(), OLD.PromocionQR, NEW.PromocionQR, 'Update', NEW.IdUsuarioPromocion);
+
+CREATE TRIGGER tr_UsuarioPromocion_Delete AFTER DELETE ON UsuarioPromocion FOR EACH ROW
+INSERT INTO Bitacora(NombreTabla, NombreCampo, Fecha, Usuario, ValorAnterior, ValorNuevo, Accion, IdCampo)
+VALUES('UsuarioPromocion', 'Fecha', now(), current_user(), OLD.Fecha, '', 'Delete', OLD.IdUsuarioPromocion),
+('UsuarioPromocion', 'Estatus', now(), current_user(), OLD.Estatus, '', 'Delete', OLD.IdUsuarioPromocion),
+('UsuarioPromocion', 'NomUsuario', now(), current_user(), OLD.NomUsuario, '', 'Delete', OLD.IdUsuarioPromocion),
+('UsuarioPromocion', 'PromocionQR', now(), current_user(), OLD.PromocionQR, '', 'Delete', OLD.IdUsuarioPromocion);

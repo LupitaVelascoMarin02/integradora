@@ -1,0 +1,183 @@
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_InsertUsuario`(IN paraNomUsuario VARCHAR(50), IN paraNombre VARCHAR(50), IN paraApePat VARCHAR(50), IN paraApeMat VARCHAR(50), IN paraFechaNac DATE, 
+IN paraCorreo VARCHAR(50), IN paraTelefono VARCHAR(15), IN paraContrasenia VARCHAR(50), IN paraIdPais INT, IN paraIdEstado INT)
+BEGIN
+	INSERT INTO Usuario
+    (NomUsuario, Nombre, ApePat, ApeMat, FechaNac, Correo, Telefono, Contrasenia, IdPais, IdEstado, IdMunicipio)
+    VALUES
+    (paraNomUsuario, paraNombre, paraApePat, paraApeMat, paraFechaNac, paraCorreo, paraTelefono, paraContrasenia, IdPais, IdEstado);
+END
+*
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_UdateUsuario`(IN paraNomUsuario VARCHAR(50), IN paraNombre VARCHAR(50), IN paraApePat VARCHAR(50), IN paraApeMat VARCHAR(50), IN paraFechaNac DATE, 
+IN paraCorreo VARCHAR(50), IN paraTelefono VARCHAR(15), IN paraContrasenia VARCHAR(50), IN paraIdPais INT, IN paraIdEstado INT)
+BEGIN
+	UPDATE Usuario SET NomUsuario=paraNomUsuario, Nombre=paraNombre, ApePat=paraApePat, ApeMat=paraApeMat, FechaNac=paraFechaNac, Correo=paraCorreo, Telefono=paraTelefono, Contrasenia=paraContrasenia,
+    IdPais=paraIdPais, IdEstado=paraIdEstado
+    WHERE NomUsuario=paraNomUsuario;
+END
+*
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_DeleteUsuario`(IN paraNomUsuario VARCHAR(50))
+BEGIN
+	DELETE FROM Usuario WHERE NomUsuario=paraNomUsuario;
+END
+*
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_SelectUsuarioAll`()
+BEGIN
+	SELECT * FROM Usuario;
+END
+*
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_SelectUsuarioById`(IN paraNomUsuario VARCHAR(50))
+BEGIN
+	SELECT * FROM Usuario WHERE NomUsuario=paraNomUsuario;
+END
+*
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_InsertPromocion`(IN paraPromocionQR VARCHAR(767), IN paraDescripcion VARCHAR(255), 
+IN paraEstatus BIT, IN paraDescuento VARCHAR(50), IN paraIdEtapa INT)
+BEGIN
+	INSERT INTO Promocion 
+    (PromocionQR, Descripcion, Estatus, Descuento, IdEtapa)
+    VALUE 
+    (paraPromocionQR, paraDescripcion, paraEstatus, paraDescuento, paraIdEtapa);
+END
+*
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_UpdatePromocion`(IN paraPromocionQR VARCHAR(767), IN paraDescripcion VARCHAR(255), 
+IN paraEstatus BIT, IN paraDescuento VARCHAR(50), IN paraIdEtapa INT)
+BEGIN
+	UPDATE Promocion SET PromocionQR=paraPromocionQR, Descripcion=paraDescripcion, Estatus=paraEstatus, Descuento=paraDescuento, IdEtapa=paraIdEtapa
+    WHERE PromocionQR=paraPromocionQR;
+END
+*
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_DeletePromocion`(IN paraPromocionQR VARCHAR(767))
+BEGIN
+	DELETE FROM Promocion WHERE PromocionQR=paraPromocionQR;
+END
+*
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_SelectPromocionAll`()
+BEGIN
+	SELECT * FROM Promocion;
+END
+*
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_SelectPromocionById`(IN paraPromocionQR VARCHAR(767))
+BEGIN
+	SELECT * FROM Promocion WHERE PromocionQR=paraPromocionQR;
+END
+*
+------------------------------------------------------------------------------------------------------------------------
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_InsertHistorial`(IN paraFecha DATETIME, IN paraCosto DOUBLE, IN paraPago BIT, IN paraDescuento VARCHAR(50), IN paraNomUsuario VARCHAR(50), IN paraIdRuta INT)
+BEGIN
+	INSERT INTO Historial(Fecha, Costo, Pago, Descuento, NomUsuario, IdRuta)
+    VALUES(paraFecha, paraCosto, paraPago, paraDescuento, paraNomUsuario, paraIdRuta);
+END
+*
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_UpdateHistorial`(IN paraIdHistorial INT, IN paraFecha DATETIME, IN paraCosto DOUBLE, IN paraPago BIT, IN paraDescuento VARCHAR(50), IN paraNomUsuario VARCHAR(50), IN paraIdRuta INT)
+BEGIN
+	UPDATE Historial SET Fecha=paraFecha, Costo=paraCosto, Pago=paraPago, Descuento=paraDescuento, NomUsuario=paraNomUsuario, IdRuta=paraIdRuta
+    WHERE IdHistorial=paraIdHistorial;
+END
+*
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_DeleteHistorial`(IN paraIdHistorial INT)
+BEGIN
+	DELETE FROM Historial WHERE IdHistorial=paraIdHistorial;
+END
+*
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_SelectHistorialAll`()
+BEGIN
+	SELECT * FROM Historial;
+END
+*
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_SelectHistorialById`(IN paraIdHistorial INT)
+BEGIN
+	SELECT * FROM Historial WHERE IdHistorial=paraIdHistorial;
+END
+*
+------------------------------------------------------------------------------------------------------------
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_InsertEtapa`(IN paraNomEtapa VARCHAR(50), IN paraDuracion VARCHAR(50), IN paraDescripcion VARCHAR(50), IN paraIdRuta INT)
+BEGIN
+	INSERT INTO Etapa(NomEtapa, Duracion, Descripcion, IdRuta)
+    VALUE
+    (paraNomEtapa, paraDuracion, paraDescripcion, paraIdRuta);
+END
+*
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_UpdateEtapa`(IN paraIdEtapa INT,IN paraNomEtapa VARCHAR(50), IN paraDuracion VARCHAR(50), IN paraDescripcion VARCHAR(50), IN paraIdRuta INT)
+BEGIN
+	UPDATE Etapa SET NomEtapa=paraNomEtapa, Duracion=paraDuracion, Descripcion=paraDescripcion, IdRuta=paraIdRuta
+    WHERE IdEtapa=paraIdEtapa;
+END
+*
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_DeleteEtapa`(IN paraIdEtapa INT)
+BEGIN
+	DELETE FROM Etapa   WHERE IdEtapa=paraIdEtapa;
+END
+*
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_SelectEtapaById`(IN paraIdEtapa INT)
+BEGIN
+	SELECT * FROM Etapa WHERE IdEtapa=paraIdEtapa;
+END
+*
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_SelectEtapaAll`()
+BEGIN
+	SELECT * FROM Etapa;
+END
+*
+--------------------------------------------------------------------------------------------------------------------------------------------------
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_InsertUsuarioPromocion`(IN paraFecha DATE, IN paraEstatus BIT, IN paraNomUsuario VARCHAR(50), 
+IN paraPromocionQR VARCHAR(767))
+BEGIN
+	INSERT INTO UsuarioPromocion 
+    (Fecha, Estatus, NomUsuario, PromocionQR)
+    VALUES
+    (paraFecha, paraEstatus, paraNomUsuario, paraPromocionQR);
+END
+*
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_UpdateUsuarioPromocion`(IN paraIdUsuarioPromocion INT, IN paraFecha DATE, IN paraEstatus BIT, 
+IN paraNomUsuario VARCHAR(50), 
+IN paraPromocionQR VARCHAR(767))
+BEGIN
+	UPDATE UsuarioPromocion SET Fecha=paraFecha, Estatus=paraEstatus, NomUsuario=paraNomUsuario, PromocionQR=paraPromocionQR
+    WHERE IdUsuarioPromocion=paraIdUsuarioPromocion;
+END
+*
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_DeleteUsuarioPromocion`(IN paraIdUsuarioPromocion INT)
+BEGIN
+	DELETE FROM UsuarioPromocion WHERE  IdUsuarioPromocion=paraIdUsuarioPromocion;
+END
+*
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_SelectUsuarioPromocionById`(IN paraIdUsuarioPromocion INT)
+BEGIN
+	SELECT * FROM UsuarioPromocion WHERE  IdUsuarioPromocion=paraIdUsuarioPromocion;
+END
+*
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_SelectUsuarioPromocionAll`()
+BEGIN
+	SELECT * FROM UsuarioPromocion;
+END
+*
+------------------------------------------------------------------------------------------------------------------
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_InsertRuta`(IN paraNomRuta VARCHAR(50), IN paraTipo VARCHAR(50), IN paraDuracion VARCHAR(50))
+BEGIN
+	INSERT INTO Ruta(NomRuta, Tipo, Duracion)
+    VALUES(paraNomRuta, paraTipo, paraDuracion);
+END
+*
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_UpdateRuta`(IN paraIdRuta INT, IN paraNomRuta VARCHAR(50), IN paraTipo VARCHAR(50), IN paraDuracion VARCHAR(50))
+BEGIN
+	UPDATE Ruta SET NomRuta=paraNomRuta, Tipo=paraTipo, Duracion=paraDuracion
+    WHERE IdRuta=paraIdRuta;
+END
+*
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_DeleteRuta`(IN paraIdRuta INT)
+BEGIN
+	DELETE FROM Ruta WHERE IdRuta=paraIdRuta;
+END
+*
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_SelectAllByIdRuta`(IN paraIdRuta INT)
+BEGIN
+	SELECT * FROM Ruta WHERE IdRuta=paraIdRuta;
+END
+*
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_SelectAllRuta`()
+BEGIN
+	SELECT * FROM Ruta;
+END
+*
+-------------------------------------------------------------------------------------------------------------------------------------------------
