@@ -1,0 +1,141 @@
+CREATE DATABASE Integradora
+USE Integradora
+
+CREATE TABLE Pais(
+IdPais INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+Nombre VARCHAR(35)
+)
+
+
+
+INSERT INTO Pais(Nombre) VALUES('México'),('Estados Unidos'),('Colombia'),('Brasil'),('Canada'),('Cuba');
+
+CREATE TABLE Estado(
+IdEstado INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+Nombre VARCHAR(35),
+IdPais INT,
+FOREIGN KEY  fk_estado_pais(IdPais) REFERENCES Pais(IdPais) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+INSERT INTO Estado(Nombre, IdPais) VALUES
+('Otro', 2)
+('Aguascalientes',1),
+('Baja California',1),
+('Baja California Sur',1),
+('Campeche',1),
+('Coahuila de Zaragoza',1),
+('Colima',1),
+('Chiapas',1),
+('Chihuahua',1),
+( 'Ciudad de México',1),
+( 'Durango',1),
+('Guanajuato',1),
+('Guerrero',1),
+('Hidalgo',1),
+('Jalisco',1),
+('México',1),
+('Michoacán de Ocampo',1),
+('Morelos',1),
+('Nayarit',1),
+('Nuevo León',1),
+('Oaxaca',1),
+('Puebla',1),
+('Querétaro',1),
+('Quintana Roo',1),
+('San Luis Potosí',1),
+('Sinaloa',1),
+('Sonora',1),
+('Tabasco',1),
+('Tamaulipas',1),
+('Tlaxcala',1),
+('Veracruz de Ignacio de la Llave',1),
+('Yucatán',1),
+('Zacatecas',1),
+('Otro', 2);
+
+CREATE TABLE Usuario(
+NomUsuario VARCHAR(50) PRIMARY KEY NOT NULL,
+Nombre VARCHAR(50),
+ApePat VARCHAR(50),
+ApeMat VARCHAR(50),
+FechaNac DATE,
+Correo VARCHAR(50),
+Telefono VARCHAR(15),
+Contrasenia VARCHAR(50),
+IdPais INT,
+FOREIGN KEY fk_usuario_pais(IdPais) REFERENCES pais(IdPais) ON UPDATE CASCADE ON DELETE RESTRICT,
+IdEstado INT,
+FOREIGN KEY fk_usuario_estado(IdEstado) REFERENCES estado(IdEstado) ON UPDATE CASCADE ON DELETE RESTRICT
+);
+
+
+INSERT INTO usuario(NomUsuario, Nombre, ApePat, ApeMat, Correo,FechaNac , Telefono, IdPais, IdEstado, IdMunicipio, Contrasenia) VALUES('MariaVM','MarÃ­a','Velasco','MarÃ­n','mariagpe.velascomarin.30@gmail.com','2019-06-25',3,2,1,4951010100,'123');
+
+
+
+
+SELECT * FROM Ruta
+CREATE TABLE Ruta(
+IdRuta INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+NomRuta VARCHAR(50),
+Tipo VARCHAR(50),
+Duracion VARCHAR(50)
+)
+
+INSERT INTO Ruta(NomRuta, Tipo, Duracion) VALUES('Ruta Calvillo','Local', '4:00' );
+
+CREATE TABLE Historial(
+IdHistorial INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+Fecha DATETIME, 
+Costo DOUBLE, 
+Pago BIT,
+Descuento VARCHAR(50),
+NomUsuario VARCHAR(50),
+FOREIGN KEY fk_historial_nomusuario(NomUsuario) REFERENCES Usuario(NomUsuario) ON UPDATE CASCADE ON DELETE RESTRICT,
+IdRuta INT, 
+FOREIGN KEY fk_historial_ruta(IdRuta) REFERENCES Ruta(IdRuta) ON UPDATE CASCADE ON DELETE RESTRICT
+)
+
+
+
+CREATE TABLE Etapa(
+IdEtapa INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+NomEtapa VARCHAR(50),
+Duracion VARCHAR(50),
+Descripcion VARCHAR(50),
+IdRuta INT,
+FOREIGN KEY fk_etapa_ruta(IdRuta) REFERENCES Ruta(IdRuta) ON UPDATE CASCADE ON DELETE RESTRICT
+)
+
+INSERT INTO Etapa (NomEtapa,Duracion,Descripcion,IdRuta) VALUES('Malpaso', '1:00','Presa de Malpaso', 1),('Flor de Calvillo', '1:00','Fabrica de dulces', 1),('Las Graditas', '1:00','Andador Matamoros, calle de las graditas', 1),('Centro Historico', '1:00','Plaza principal de Calvillo', 1);
+
+CREATE TABLE Promocion(
+PromocionQR varchar(767) primary key not null,
+Descripcion VARCHAR(255),
+Estatus BIT,
+Descuento VARCHAR(50),
+IdEtapa INT,
+FOREIGN KEY fk_promocion_etapa(IdEtapa) REFERENCES Etapa(IdEtapa) ON UPDATE CASCADE ON DELETE RESTRICT
+)
+
+CREATE TABLE UsuarioPromocion (
+IdUsuarioPromocion INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+Fecha DATE, 
+Estatus BIT,
+NomUsuario VARCHAR(50),
+FOREIGN KEY fk_usuariopromocion_nomusuario(NomUsuario) REFERENCES Usuario(NomUsuario) ON UPDATE CASCADE ON DELETE RESTRICT,
+PromocionQR varchar(767),
+FOREIGN KEY (PromocionQR) REFERENCES Promocion(PromocionQR) ON UPDATE CASCADE ON DELETE RESTRICT
+)
+
+CREATE TABLE Bitacora(
+IdBitacora INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+NombreTabla VARCHAR (100),
+NombreCampo VARCHAR (100),
+Fecha DATETIME,
+Usuario VARCHAR(50),
+ValorAnterior VARCHAR(255),
+ValorNuevo VARCHAR(255),
+Accion VARCHAR(20),
+IdCampo INT
+)
