@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Rutas Turisticas</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="../CSS/Estilos.css">
+		<link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+		<script src="https://code.jquery.com/jquery-1.11.2.min.js" integrity="sha256-Ls0pXSlb7AYs7evhd+VLnWsZ/AqEHcXBeMZUycz/CcA=" crossorigin="anonymous"></script>
+		<script type="text/javascript">
+			$(document).ready(function()
+			{  
+				$(".cont-arriba").css('min-height',($(window).height()-200)+"px");
+				cont = 1;
+				$("#abrirmenu").click(function(){
+					if(cont == 1){
+						$("nav").slideDown('fast');
+						
+						cont = 2;
+					}else if(cont == 2){
+						$("nav").slideUp('fast');
+						
+						cont = 1;
+					}
+				});
+			});
+		</script>
+	</head>
+	<body class="bodycontacto">
+		<div id="abrirmenu">MENU</div>
+		<div class="cont-arriba">
+			<header>
+				<div class="contenedor">
+					<div><img src="../Imagenes/logo.png" class="contenedor" height="100px" width="110px"></div>
+					<h1>TIDSM Tour Operadora </h1>
+					<nav> 
+						<ul>
+							<li><a href="../PHP/Inicio.php">Inicio</a></li>
+							<li><a href="../PHP/Rutas.php">Rutas</a></li>
+							<li><a href="../PHP/Contacto.php">Contacto</a></li>
+							<li><a href="Promociones.html">Promociones</a></li>
+							<li class="actual"><a href="Qr.html">Registra tu c&oacute;digo QR</a></li>
+							<li><a href="../PHP/cerrar.php">Cerrar sesion</a></li>
+						</ul>
+					</nav>
+				</div>
+			</header>
+			<h1 class="tit">Registra tu c&oacute;digo aqu&iacute;</h1>
+			<form method="POST" action="../PHP/Canje.php" class="hola">
+				<p>
+					<label for="cod">Promociones</label>
+					<input type="text" placeholder="Introduzca su código QR" name="cod" id="cod" value="" />
+				</p>
+				<p>
+					<button>Canjear código</button>
+				</p>
+			</form>
+		</div>
+		<footer class="f6">
+			<p> Tecnologias de la Informacion area Desarrollo de Software Multiplataforma, Copyright &copy; 2019</p>
+		</footer>
+	</body>
+	
+</html>
